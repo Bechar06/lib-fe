@@ -1,0 +1,5 @@
+<span style="font-weight: bold" [ngClass]="{'text-danger':data.messageType=='error','text-success':data.messageType=='success'}">
+  {{data.message}} <i *ngIf="data.messageType=='error'" style="color: yellow" class="fa fa-exclamation-triangle"></i>
+   <i *ngIf="data.messageType=='success' " class="fa fa-check-circle"></i>
+
+</span>

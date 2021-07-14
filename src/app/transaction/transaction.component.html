@@ -1,0 +1,175 @@
+<div class="" id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row row-stat">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading panel-heading-divider">Transaction<span
+            class="panel-subtitle">Maintenance des transactions</span>
+          </div>
+          <div tabindex="-1" role="dialog" class="modal overlay" id="exampleModal" data-backdrop="false">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Rechercher des Transactions</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <input
+                    type="text"
+                    style="padding:8px;margin:15px auto;width:30%;"
+                    placeholder="Rechercher par Code Transaction..."
+                    (keyup)="updateFilter($event)"
+                  />
+                  <ngx-datatable #table [rows]="transList" [columns]="columns" [columnMode]="ColumnMode.force"
+                                 [headerHeight]="40"
+                                 [rowHeight]="40"
+                                 [limit]="5" [selected]="selected"
+                                 [selectionType]="SelectionType.single"
+                                 (activate)="onActivate($event)"
+                                 [footerHeight]="50"
+                                 rowHeight="auto"
+                                 (select)="onSelect()" class="material">
+                  </ngx-datatable>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" [disabled]="!enableAtteindre" (click)="atteindre()" class="btn btn-primary">Atteindre
+                  </button>
+                  <button #closebutton type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="xs-mt-10 xs-mb-10  ">
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-toolbar>
+                    <span>{{titleAction}}</span>
+                  </mat-toolbar>
+                  <form [formGroup]="myForm" autocomplete="off" class="form-horizontal">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Code transaction</mat-label>
+                              <input matInput placeholder="Code transaction" formControlName="codeTrans"
+                                     [readonly]="action!='add' && action!='update' " required
+                                     [(ngModel)]="transactionModule.codeTrans"
+                                     id="codeTrans" class="form-control">
+                              <mat-error *ngIf="hasError('codeTrans', 'required')">
+                                <strong>Code transaction</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Code des membres</mat-label>
+                              <mat-select matNativeControl required  formControlName="memberId"
+                                          [disabled]="action==null"
+                                          [(ngModel)]="transactionModule.memberId">
+                                <mat-option *ngFor="let member of memberList" [value]="member.memberRecordId">
+                                  {{member.codeMemberRecord}}
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="hasError('codeTrans', 'required')">
+                                <strong>Code des membres</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Codes de livers</mat-label>
+                              <mat-select matNativeControl required id="idBook"
+                                          [disabled]="action==null" formControlName="idBook"
+                                          [(ngModel)]="transactionModule.idBook">
+                                <mat-option *ngFor="let book of bookList" [value]="book.bookId">
+                                  {{book.codeBook}}
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="hasError('codeTrans', 'required')">
+                                <strong>Code des livers</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Choisissez une date d'emission</mat-label>
+                              <input class="col-sm-9" matInput [disabled]="action==null" [matDatepicker]="picker"
+                                     required readonly style="color: black" (click)="picker.open()"
+                                     [(ngModel)]="transactionModule.dateOfIssue" formControlName="dateOfIssue"
+                                     id="dateOfIssue" >
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                              <mat-error *ngIf="hasError('codeTrans', 'required')">
+                                <strong>Date d'emission</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Choisissez une date d'expiration</mat-label>
+                              <input class="col-sm-9" matInput [disabled]="action==null" [matDatepicker]="picker1"
+                                     required readonly style="color: black" (click)="picker1.open()"
+                                     [(ngModel)]="transactionModule.dueDate" formControlName="dueDate"
+                                     id="dueDate" >
+                              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                              <mat-datepicker #picker1></mat-datepicker>
+                              <mat-error *ngIf="hasError('codeTrans', 'required')">
+                                <strong>Date d'expiration</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <div class="row center-block" *ngIf="action==null">
+                        <div class="col-md-2">
+                          <button (click)="startAction('add')" class="btn btn-space btn-primary">Ajouter</button>
+                        </div>
+                        <div class="col-md-2">
+                          <button (click)="startAction('update')" class="btn btn-space btn-success">Modifier</button>
+                        </div>
+                        <div class="col-md-2">
+                          <button data-toggle="modal" data-target="#exampleModal" class="btn btn-space btn-warning">
+                            Rechercher
+                          </button>
+                        </div>
+                        <div class="col-md-2">
+                          <button (click)="startAction('delete')" class="btn btn-space btn-danger">Supprimer</button>
+                        </div>
+                      </div>
+                      <div class="row center-block" *ngIf="action!=null">
+                        <div class="col-md-2">
+                          <button [disabled]="action==null || !myForm.valid"  (click)="callAction()"
+                                  class="btn btn-space btn-primary">Valider
+                          </button>
+                        </div>
+                        <div class="col-md-2">
+                          <button [disabled]="action==null" (click)="startAction(null)"
+                                  class="btn btn-space btn-success">Annuler
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

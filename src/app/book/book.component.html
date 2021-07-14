@@ -1,0 +1,209 @@
+<div class="" id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row row-stat">
+      <div class="col-md-6 offset-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading panel-heading-divider">Livres<span
+            class="panel-subtitle">Maintenance des livres</span>
+          </div>
+          <div tabindex="-1" role="dialog" class="modal overlay" id="exampleModal" data-backdrop="false">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Rechercher des Livres</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <input
+                    type="text"
+                    style="padding:8px;margin:15px auto;width:30%;"
+                    placeholder="Rechercher par Code livre..."
+                    (keyup)="updateFilter($event)"
+                  />
+                  <ngx-datatable #table [rows]="bookList" [columns]="columns" [columnMode]="ColumnMode.force"
+                                 [headerHeight]="40"
+                                 [rowHeight]="40"
+                                 [limit]="5" [selected]="selected"
+                                 [selectionType]="SelectionType.single"
+                                 (activate)="onActivate($event)"
+                                 [footerHeight]="50"
+                                 rowHeight="auto"
+                                 (select)="onSelect()" class="material">
+                  </ngx-datatable>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" [disabled]="!enableAtteindre" (click)="atteindre()" class="btn btn-primary">
+                    Atteindre
+                  </button>
+                  <button #closebutton type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="xs-mt-10 xs-mb-10  ">
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-toolbar>
+                    <span>{{titleAction}}</span>
+                  </mat-toolbar>
+                  <form [formGroup]="myForm" autocomplete="off" class="form-horizontal">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Code Livre</mat-label>
+                              <input matInput placeholder="Code Livre" [readonly]="action!='add' && action!='update' "
+                                     required formControlName="codeBook" [(ngModel)]="bookComponentModel.codeBook"
+                                     id="form-control-2" class="form-control">
+                              <mat-error *ngIf="hasError('codeBook', 'required')">
+                                <strong>Code Livre</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Auteur</mat-label>
+                              <input matInput [readonly]="action!='add' && action!='update' " placeholder="Auteur"
+                                     required formControlName="author" [(ngModel)]="bookComponentModel.author"
+                                     id="form-control-1" class="form-control">
+                              <mat-error *ngIf="hasError('author', 'required')">
+                                <strong>Auteur</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Titre</mat-label>
+                              <input matInput [readonly]="action!='add' && action!='update' " placeholder="Titre"
+                                     required
+                                     formControlName="title" [(ngModel)]="bookComponentModel.title"
+                                     id="form-control-5" class="form-control">
+                              <mat-error *ngIf="hasError('title', 'required')">
+                                <strong>Titre</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Prix</mat-label>
+                              <input matInput [readonly]="action!='add' && action!='update' " placeholder="Prix"
+                                     required type="number"
+                                     formControlName="price" [(ngModel)]="bookComponentModel.price"
+                                     id="form-control-7" class="form-control">
+                              <mat-error *ngIf="hasError('price', 'required')">
+                                <strong>Prix</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Grille</mat-label>
+                              <input matInput type="number" [readonly]="action!='add' && action!='update' "
+                                     placeholder="Grille" required
+                                     formControlName="rackNo" [(ngModel)]="bookComponentModel.rackNo"
+                                     id="form-control-4" class="form-control">
+                              <mat-error *ngIf="hasError('rackNo', 'required')">
+                                <strong>Code transaction</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Statuts</mat-label>
+                              <mat-select matNativeControl required formControlName="status"
+                                          [disabled]="action==null"
+                                          [(ngModel)]="bookComponentModel.status">
+                                <mat-option value="journau">Journaux</mat-option>
+                                <mat-option value="livre">Livres d'étude</mat-option>
+                                <mat-option value="magazine">Magazines</mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="hasError('status', 'required')">
+                                <strong>Code transaction</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Edition</mat-label>
+                              <input matInput [readonly]="action!='add' && action!='update' " placeholder="Edition"
+                                     type="number" required
+                                     formControlName="edition" [(ngModel)]="bookComponentModel.edition"
+                                     id="form-control-10" class="form-control">
+                              <mat-error *ngIf="hasError('edition', 'required')">
+                                <strong>Code transaction</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Date d'achat</mat-label>
+                              <input class="col-md-9" matInput [disabled]="action==null" [matDatepicker]="picker"
+                                     required style="color: black"
+                                     [(ngModel)]="bookComponentModel.dateOfPurchase" (click)="picker.open()"
+                                     id="form-control-11" formControlName="dateOfPurchase">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                              <mat-error *ngIf="hasError('dateOfPurchase', 'required')">
+                                <strong>Code transaction</strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 row clearfix" >
+                        <div class=" float-start" *ngIf="action==null">
+                          <button (click)="startAction('add')" class="btn btn-space btn-primary">Ajouter</button>
+                        </div>
+                        <div class="float-start marging-left-15" *ngIf="action==null">
+                          <button (click)="startAction('update')" class="btn btn-space btn-success">Modifier</button>
+                        </div>
+                        <div class="float-start marging-left-15" *ngIf="action==null">
+                          <button data-toggle="modal" data-target="#exampleModal" class="btn btn-space btn-warning">
+                            Rechercher
+                          </button>
+                        </div>
+                        <div class="float-start marging-left-15" *ngIf="action==null">
+                          <button (click)="startAction('delete')" class="btn btn-space btn-danger">Supprimer</button>
+                        </div>
+                        <div class="float-start" *ngIf="action!=null">
+                          <button [disabled]="action==null || !myForm.valid" (click)="callAction()"
+                                  class="btn btn-space btn-primary">Valider
+                          </button>
+                        </div>
+                        <div class="float-start marging-left-15" *ngIf="action!=null">
+                          <button [disabled]="action==null" (click)="startAction(null)"
+                                  class="btn btn-space btn-success">Annuler
+                          </button>
+                        </div>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

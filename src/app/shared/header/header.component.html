@@ -1,0 +1,11 @@
+<header>
+  <div class="headerwrapper">
+    <img src="/assets/images/logo.png" class="logo"/>
+    <div class="header-right" *ngIf="showAdminBoard">
+      <a class="btn btn-social-icon btn-github hidden-sm-down" (click)="logout()">Log Out</a>
+    </div>
+    <div class="header-right" *ngIf="!showAdminBoard">
+      <a class="btn btn-social-icon btn-github hidden-sm-down" [routerLink]="['/login']">Log in</a>
+    </div><!-- header-right -->
+  </div><!-- headerwrapper -->
+</header>

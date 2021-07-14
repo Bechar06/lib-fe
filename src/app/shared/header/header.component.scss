@@ -1,0 +1,32 @@
+
+
+/********** 3. HEADER STYLES **********/
+/**************************************/
+
+.headerwrapper {
+    //background-color: #1f6b9e;
+    min-height: 60px;
+    width: 100%;
+    z-index: 1000;
+  -webkit-box-shadow: 0px 9px 16px -12px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 9px 16px -12px rgba(0,0,0,0.75);
+  box-shadow: 0px 9px 16px -12px rgba(0,0,0,0.75);
+    &:after {
+        clear: both;
+        display: block;
+        content: '';
+    }
+}
+.header-left {
+    float: left;
+}
+
+.header-right {
+    float: right;
+}
+
+a.btn.btn-social-icon.btn-github {
+    color: #000;
+    border: 1px solid #000;
+    margin: 10px;
+}

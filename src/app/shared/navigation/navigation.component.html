@@ -1,0 +1,63 @@
+<div class="sidebar hidden-sm-down">
+  <ul class="nav in" id="side-menu">
+    <!--<li class="sidebar-search hidden-sm hidden-md hidden-lg">
+       input-group
+      <div class="input-group custom-search-form">
+        <input type="text" class="form-control" placeholder="Search..."> <span class="input-group-btn">
+            <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+            </span></div>
+       /input-group
+    </li>-->
+    <li class="user-pro" *ngIf="showAdminBoard">
+      <a href="#" class="text-center">
+        <div class="profile-img">
+          <img src="assets/images/user.png"/>
+        </div>
+        <span>{{fullName}}</span>
+        <small class="text-center">Admin</small>
+      </a>
+    </li>
+    <!-- <li class=""><a href="javascript:void(0);" class="waves-effect"><i class="fa fa-envelope-o"></i> <span
+            class="hide-menu"> Mailbox <span class="fa arrow"></span><span
+            class="label label-rouded label-danger pull-right">6</span></span></a>
+    </li> -->
+    <ng-container *ngIf="showAdminBoard">
+      <li>
+        <a [routerLink]="['/transactions']" [routerLinkActive]="['active']">
+          <i class="fa fa-exchange"></i>
+          <span class="hide-menu">Transaction</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/books']" [routerLinkActive]="['active']">
+          <i class="fa fa-book"></i>
+          <span class="hide-menu">Livres</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/member-record']" [routerLinkActive]="['active']">
+          <i class="fa fa-users"></i>
+          <span class="hide-menu">Membres</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/bill']" [routerLinkActive]="['active']">
+          <i class="fa fa-file"></i>
+          <span class="hide-menu">Facture</span>
+        </a>
+      </li>
+    </ng-container>
+    <li *ngIf="!showAdminBoard">
+      <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+        <i class="fa fa-user-o"></i>
+        <span class="hide-menu">Login</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/register']" [routerLinkActive]="['active']">
+        <i class="fa fa-user-o"></i>
+        <span class="hide-menu">Créer un compte</span>
+      </a>
+    </li>
+  </ul>
+</div>
