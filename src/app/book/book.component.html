@@ -1,54 +1,22 @@
 <div class="" id="page-wrapper">
   <div class="container-fluid">
     <div class="row row-stat">
-      <div class="col-md-6 offset-md-3">
+      <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading panel-heading-divider">Livres<span
             class="panel-subtitle">Maintenance des livres</span>
           </div>
+
           <div tabindex="-1" role="dialog" class="modal overlay" id="exampleModal" data-backdrop="false">
             <div class="modal-dialog modal-xl" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Rechercher des Livres</h5>
+                  <h5 class="modal-title" >{{titleAction}}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <input
-                    type="text"
-                    style="padding:8px;margin:15px auto;width:30%;"
-                    placeholder="Rechercher par Code livre..."
-                    (keyup)="updateFilter($event)"
-                  />
-                  <ngx-datatable #table [rows]="bookList" [columns]="columns" [columnMode]="ColumnMode.force"
-                                 [headerHeight]="40"
-                                 [rowHeight]="40"
-                                 [limit]="5" [selected]="selected"
-                                 [selectionType]="SelectionType.single"
-                                 (activate)="onActivate($event)"
-                                 [footerHeight]="50"
-                                 rowHeight="auto"
-                                 (select)="onSelect()" class="material">
-                  </ngx-datatable>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" [disabled]="!enableAtteindre" (click)="atteindre()" class="btn btn-primary">
-                    Atteindre
-                  </button>
-                  <button #closebutton type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div class="xs-mt-10 xs-mb-10  ">
-              <div class="row">
-                <div class="col-md-12">
-                  <mat-toolbar>
-                    <span>{{titleAction}}</span>
-                  </mat-toolbar>
                   <form [formGroup]="myForm" autocomplete="off" class="form-horizontal">
                     <div class="row">
                       <div class="col-md-12">
@@ -127,7 +95,6 @@
                             <mat-form-field class="full-width">
                               <mat-label>Statuts</mat-label>
                               <mat-select matNativeControl required formControlName="status"
-                                          [disabled]="action==null"
                                           [(ngModel)]="bookComponentModel.status">
                                 <mat-option value="journau">Journaux</mat-option>
                                 <mat-option value="livre">Livres d'étude</mat-option>
@@ -171,33 +138,62 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-12 row clearfix" >
-                        <div class=" float-start" *ngIf="action==null">
-                          <button (click)="startAction('add')" class="btn btn-space btn-primary">Ajouter</button>
-                        </div>
-                        <div class="float-start marging-left-15" *ngIf="action==null">
-                          <button (click)="startAction('update')" class="btn btn-space btn-success">Modifier</button>
-                        </div>
-                        <div class="float-start marging-left-15" *ngIf="action==null">
-                          <button data-toggle="modal" data-target="#exampleModal" class="btn btn-space btn-warning">
-                            Rechercher
-                          </button>
-                        </div>
-                        <div class="float-start marging-left-15" *ngIf="action==null">
-                          <button (click)="startAction('delete')" class="btn btn-space btn-danger">Supprimer</button>
-                        </div>
-                        <div class="float-start" *ngIf="action!=null">
-                          <button [disabled]="action==null || !myForm.valid" (click)="callAction()"
-                                  class="btn btn-space btn-primary">Valider
-                          </button>
-                        </div>
-                        <div class="float-start marging-left-15" *ngIf="action!=null">
-                          <button [disabled]="action==null" (click)="startAction(null)"
-                                  class="btn btn-space btn-success">Annuler
-                          </button>
-                        </div>
-                      </div>
                   </form>
+                </div>
+                <div class="modal-footer">
+                  <div class="float-start">
+                    <button [disabled]="action==null || !myForm.valid" (click)="callAction()"
+                            class="btn btn-space btn-primary">Valider
+                    </button>
+                  </div>
+                  <div class="float-start marging-left-15">
+                    <button #closebutton data-dismiss="modal"
+                            class="btn btn-space btn-success">Annuler
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="xs-mt-10 xs-mb-10  ">
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-toolbar>
+                    <span>Livres</span>
+                  </mat-toolbar>
+                  <div class="row">
+                    <span class="col-md-12">
+                      <span class="col-md-6">
+                        <input
+                          type="text"
+                          style="padding:8px;margin:15px auto;width:30%;"
+                          placeholder="Rechercher par Code livre..."
+                          (keyup)="updateFilter($event)"
+                        />
+                      </span>
+                      <span class="col-md-6 actions">
+                        <button (click)="startAction('add')" data-toggle="modal" data-target="#exampleModal" class="btn btn-space btn-primary" >Ajouter</button>
+                        <button (click)="startAction('update')" data-toggle="modal" data-target="#exampleModal" class="btn btn-space btn-success">Modifier</button>
+                        <button (click)="startAction('delete')" class="btn btn-space btn-danger">Supprimer</button>
+                      </span>
+
+                    </span>
+                    <span class="col-md-12">
+                      <ngx-datatable #table [rows]="bookList" [columns]="columns" [columnMode]="ColumnMode.force"
+                                    [headerHeight]="40"
+                                    [rowHeight]="40"
+                                    [limit]="5" [selected]="selected"
+                                    [selectionType]="SelectionType.single"
+                                    (activate)="onActivate($event)"
+                                    [footerHeight]="50"
+                                    rowHeight="auto"
+                                    (select)="onSelect()" class="material">
+                      </ngx-datatable>
+                    </span>
+
+                  </div>
                 </div>
               </div>
             </div>

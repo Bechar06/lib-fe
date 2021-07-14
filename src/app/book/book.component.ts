@@ -38,7 +38,6 @@ export class BookComponent implements OnInit {
   action: string = null;
   myForm: FormGroup;
   titleAction: string = 'Consultation';
-  enableAtteindre = false;
   columns: any[] = [
     {name: 'codeBook'},
     {name: 'author'},
@@ -46,8 +45,7 @@ export class BookComponent implements OnInit {
     {name: 'price'},
     {name: 'rackNo'},
     {name: 'status'},
-    {name: 'edition'},
-    {name: 'dateOfPurchase'}
+    {name: 'edition'}
   ];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   SelectionType = SelectionType;
@@ -95,19 +93,20 @@ export class BookComponent implements OnInit {
         this.bookOldeModel = {...this.bookComponentModel};
         this.bookComponentModel = new BookComponentModel();
         this.action = 'add';
-        this.titleAction = 'Creation';
+        this.titleAction = 'Ajouter Livre';
         break;
       }
       case 'update': {
         this.bookOldeModel = {...this.bookComponentModel};
         this.action = 'update';
-        this.titleAction = 'Modification';
+        this.titleAction = 'Modifier Livre';
         break;
       }
       case 'delete': {
+        const message = "Est-ce que vous confirmez la suppression de " + this.bookComponentModel.codeBook +"?";
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
           width: '850px',
-          data: "Est-ce que vous confirmez la suppression de ce livre?"
+          data: message
         });
         dialogRef.afterClosed().subscribe(result => {
           if (result) {
@@ -149,6 +148,7 @@ export class BookComponent implements OnInit {
             this.action = null;
             this.titleAction = 'Consultation';
             this.openSnackBar(this.initData('Le livre est ajouté avec succès', 'success'));
+            this.closebutton.nativeElement.click();
             this.getAllbook();
           }, error => {
             this.openSnackBar(this.initData(error.error.message, 'error'));
@@ -164,6 +164,7 @@ export class BookComponent implements OnInit {
             this.action = null;
             this.titleAction = 'Consultation';
             this.openSnackBar(this.initData('Le livre est modifié avec succès', 'success'));
+            this.closebutton.nativeElement.click();
             this.getAllbook();
           }, error => {
             this.openSnackBar(this.initData(error.error.message, 'error'));
@@ -183,9 +184,10 @@ export class BookComponent implements OnInit {
     const val = event.target.value.toLowerCase();
 
     // filter our data
-    const temp = this.bookTempList.filter(function (d) {
-      if (d && d.codeBook)
-        return d.codeBook.toLowerCase().indexOf(val) !== -1 || !val;
+    const temp = this.bookTempList.filter(book => {
+      return book && book.codeBook && book.title && book.author &&
+          (book.codeBook.toLowerCase().includes(val) || book.title.toLowerCase().includes(val) ||
+            book.author.toLowerCase().includes(val));
     });
 
     // update the rows
@@ -195,15 +197,11 @@ export class BookComponent implements OnInit {
   }
 
   onSelect() {
-    this.enableAtteindre = true;
+    this.bookComponentModel = this.selected[0];
   }
 
   onActivate(event) {
     console.log('Activate Event', event);
   }
 
-  atteindre() {
-    this.bookComponentModel = this.selected[0];
-    this.closebutton.nativeElement.click()
-  }
 }

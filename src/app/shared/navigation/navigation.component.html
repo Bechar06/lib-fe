@@ -46,17 +46,18 @@
           <span class="hide-menu">Facture</span>
         </a>
       </li>
+
+      <li>
+        <a [routerLink]="['/register']" [routerLinkActive]="['active']">
+          <i class="fa fa-user-o"></i>
+          <span class="hide-menu">Créer un compte</span>
+        </a>
+      </li>
     </ng-container>
     <li *ngIf="!showAdminBoard">
       <a [routerLink]="['/login']" [routerLinkActive]="['active']">
         <i class="fa fa-user-o"></i>
         <span class="hide-menu">Login</span>
-      </a>
-    </li>
-    <li>
-      <a [routerLink]="['/register']" [routerLinkActive]="['active']">
-        <i class="fa fa-user-o"></i>
-        <span class="hide-menu">Créer un compte</span>
       </a>
     </li>
   </ul>
