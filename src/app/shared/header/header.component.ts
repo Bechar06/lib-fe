@@ -16,8 +16,9 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     this.tokenStorageService.signOut();
+    window.location.replace("/#/login")
     window.location.reload();
-    window.location.replace("/#/login");
+;
   }
 
   login() {

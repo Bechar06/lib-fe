@@ -17,7 +17,7 @@ export class MemberRecordComponent implements OnInit {
 
   private memberRecordOldeModel: MemberRecordComponentModel = new MemberRecordComponentModel();
   durationInSeconds = 5;
-  enableAtteindre: boolean = false;
+  //enableAtteindre: boolean = false;
 
   constructor(private memberRecordservice: MemberRecordService,
               private _snackBar: MatSnackBar,
@@ -37,7 +37,7 @@ export class MemberRecordComponent implements OnInit {
   private currentItem: MemberRecordComponentModel;
   myForm: FormGroup;
   action: string = null;
-  titleAction: string = 'Consultation';
+  titleAction: string = 'Consultation ';
   @ViewChild(DatatableComponent) table: DatatableComponent;
   SelectionType = SelectionType;
   ColumnMode = ColumnMode;
@@ -94,19 +94,20 @@ export class MemberRecordComponent implements OnInit {
         this.memberRecordComponentModel = new MemberRecordComponentModel();
         this.memberRecordComponentModel.noBookIssued = 0;
         this.action = 'add';
-        this.titleAction = 'Creation';
+        this.titleAction = 'Ajouter Membre';
         break;
       }
       case 'update': {
         this.memberRecordOldeModel = {...this.memberRecordComponentModel};
         this.action = 'update';
-        this.titleAction = 'Modification';
+        this.titleAction = 'Modifer Membre';
         break;
       }
       case 'delete': {
+        const message = "Est-ce que vous confirmez la suppression de " + this.memberRecordComponentModel.codeMemberRecord +"?";
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
           width: '850px',
-          data: "Est-ce que vous confirmez la suppression de ce membre?"
+          data: message
         });
         dialogRef.afterClosed().subscribe(result => {
           if (result) {
@@ -180,11 +181,11 @@ export class MemberRecordComponent implements OnInit {
     const val = event.target.value.toLowerCase();
 
     // filter our data
-    const temp = this.memberRecordTempList.filter(function (d) {
-      if (d && d.codeMemberRecord)
-        return d.codeMemberRecord.toLowerCase().indexOf(val) !== -1 || !val;
+    const temp = this.memberRecordList.filter(memberRecord => {
+      return memberRecord && memberRecord.codeMemberRecord && memberRecord.fullName && memberRecord.adress &&
+          (memberRecord.codeMemberRecord.toLowerCase().includes(val) || memberRecord.fullName.toLowerCase().includes(val) ||
+          memberRecord.adress.toLowerCase().includes(val));
     });
-
     // update the rows
     this.memberRecordList = temp;
     // Whenever the filter changes, always go back to the first page
@@ -192,7 +193,7 @@ export class MemberRecordComponent implements OnInit {
   }
 
   onSelect() {
-    this.enableAtteindre = true;
+    this.memberRecordComponentModel = this.selected[0]
   }
 
   onActivate(event) {

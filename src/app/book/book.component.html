@@ -17,6 +17,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
+
                   <form [formGroup]="myForm" autocomplete="off" class="form-horizontal">
                     <div class="row">
                       <div class="col-md-12">
@@ -143,7 +144,7 @@
                 <div class="modal-footer">
                   <div class="float-start">
                     <button [disabled]="action==null || !myForm.valid" (click)="callAction()"
-                            class="btn btn-space btn-primary">Valider
+                            class="btn btn-space btn-primary" #closebutton data-dismiss="modal">Valider
                     </button>
                   </div>
                   <div class="float-start marging-left-15">
@@ -174,11 +175,10 @@
                         />
                       </span>
                       <span class="col-md-6 actions">
-                        <button (click)="startAction('add')" data-toggle="modal" data-target="#exampleModal" class="btn btn-space btn-primary" >Ajouter</button>
-                        <button (click)="startAction('update')" data-toggle="modal" data-target="#exampleModal" class="btn btn-space btn-success">Modifier</button>
-                        <button (click)="startAction('delete')" class="btn btn-space btn-danger">Supprimer</button>
+                        <button (click)="startAction('add')" data-toggle="modal" data-target="#exampleModal" mat-raised-button color="primary" >Ajouter</button>
+                        <button (click)="startAction('update')" data-toggle="modal" data-target="#exampleModal" mat-raised-button mat-button color="accent">Modifier</button>
+                        <button (click)="startAction('delete')" mat-raised-button color="warn">Supprimer</button>
                       </span>
-
                     </span>
                     <span class="col-md-12">
                       <ngx-datatable #table [rows]="bookList" [columns]="columns" [columnMode]="ColumnMode.force"

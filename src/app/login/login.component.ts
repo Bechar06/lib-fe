@@ -41,8 +41,9 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage() {
-    window.location.reload();
     window.location.replace("/#/books");
+    window.location.reload();
+
 
   }
 }
