@@ -45,12 +45,13 @@ export class TransactionComponent implements OnInit {
     {name: 'memberCode'},
     {name: 'bookCode'},
     {name: 'dateOfIssue'},
-    {name: 'dateOfIssue'},
+    {name: 'dueDate'},
   ];
   transactionModule: TransactionModel = new TransactionModel();
   private currentItem: TransactionModel;
   action: string = null;
-  titleAction: string = 'Consultation';
+  titleAction: string = 'Consultation des Transactions';
+  selectedRow: TransactionModel;
 
   ngOnInit() {
     this.getFirstTrans();
@@ -116,7 +117,14 @@ export class TransactionComponent implements OnInit {
   }
 
   onActivate(event) {
-    console.log('Activate Event', event);
+    if(event.type === 'click') {
+      this.selectedRow = event.row;
+      this.transService.approve(this.selectedRow).subscribe(res=>{
+        if(res && res.length > 0){
+          this.transList = res;
+        }
+      });
+    }
   }
 
   atteindre() {
@@ -145,7 +153,7 @@ export class TransactionComponent implements OnInit {
         this.transOldModel = {...this.transactionModule};
         this.transactionModule = new TransactionModel();
         this.action = 'add';
-        this.titleAction = 'Creation';
+        this.titleAction = 'Creation d une Transaction';
         break;
       }
       case 'update': {
@@ -185,6 +193,14 @@ export class TransactionComponent implements OnInit {
       message: error,
       messageType: messageType
     };
+  }
+
+
+  approve(){
+    if(this.transactionModule){
+      console.table(this.transactionModule);
+      window.location.reload();
+    }
   }
 
 

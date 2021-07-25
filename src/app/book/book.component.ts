@@ -148,7 +148,7 @@ export class BookComponent implements OnInit {
             this.action = null;
             this.titleAction = 'Consultation';
             this.openSnackBar(this.initData('Le livre est ajouté avec succès', 'success'));
-            this.closebutton.nativeElement.click();
+            //this.closebutton.nativeElement.click();
             this.getAllbook();
           }, error => {
             this.openSnackBar(this.initData(error.error.message, 'error'));

@@ -7,7 +7,7 @@
 }
 
 .actions {
-  margin-top: 14px;
+  margin-top: 16px;
   float: right;
   text-align: right;
   button {
@@ -15,3 +15,7 @@
   }
 }
 
+.mat-success {
+  background-color: green;
+  color: #fff;
+}

@@ -46,4 +46,11 @@ export class TransactionService {
    return this.http.get<TransactionModel>(
   `http://localhost:8080/api/transaction/${codeTrans}`);
   }
+
+  approve(trans : TransactionModel) {
+    let header = new HttpHeaders();
+    header= header.append('content-type', 'application/json');
+    return this.http.post<TransactionModel[]>(
+      `http://localhost:8080/api/transaction/approve`,trans, {headers : header});
+  }
 }

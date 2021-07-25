@@ -194,15 +194,11 @@ export class MemberRecordComponent implements OnInit {
 
   onSelect() {
     this.memberRecordComponentModel = this.selected[0]
+
   }
 
   onActivate(event) {
     console.log('Activate Event', event);
-  }
-
-  atteindre() {
-    this.memberRecordComponentModel = this.selected[0];
-    this.closebutton.nativeElement.click()
   }
 
 }
