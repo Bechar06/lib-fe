@@ -9,5 +9,5 @@ export class BookComponentModel {
   status: string;
   edition: string;
   dateOfPurchase: Date;
-
+  qnt:number;
 }
