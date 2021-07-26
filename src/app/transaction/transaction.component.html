@@ -111,7 +111,7 @@
                 <div class="modal-footer">
                   <div class="float-start">
                     <button [disabled]="action==null || !myForm.valid" (click)="callAction()"
-                            class="btn btn-space btn-primary" >Valider
+                      #closebutton data-dismiss="modal" class="btn btn-space btn-primary" >Valider
                     </button>
                   </div>
                   <div class="float-start marging-left-15">

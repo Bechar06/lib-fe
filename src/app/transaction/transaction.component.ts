@@ -119,11 +119,6 @@ export class TransactionComponent implements OnInit {
   onActivate(event) {
     if(event.type === 'click') {
       this.selectedRow = event.row;
-      this.transService.approve(this.selectedRow).subscribe(res=>{
-        if(res && res.length > 0){
-          this.transList = res;
-        }
-      });
     }
   }
 
@@ -198,8 +193,12 @@ export class TransactionComponent implements OnInit {
 
   approve(){
     if(this.transactionModule){
-      console.table(this.transactionModule);
-      window.location.reload();
+      this.transService.approve(this.selectedRow).subscribe(res=>{
+        if(res){
+          this.transList = res;
+          this.openSnackBar(this.initData("Transaction approuved", "success"));
+        }
+      });
     }
   }
 
