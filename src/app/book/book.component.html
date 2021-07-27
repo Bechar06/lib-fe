@@ -86,7 +86,7 @@
                                      formControlName="rackNo" [(ngModel)]="bookComponentModel.rackNo"
                                      id="form-control-4" class="form-control">
                               <mat-error *ngIf="hasError('rackNo', 'required')">
-                                <strong>Code transaction</strong> est nécessaire
+                                <strong>Grille </strong> est nécessaire
                               </mat-error>
                             </mat-form-field>
                           </div>
@@ -94,7 +94,7 @@
                         <div class="row">
                           <div class="col-md-12">
                             <mat-form-field class="full-width">
-                              <mat-label>Statuts</mat-label>
+                              <mat-label>Status</mat-label>
                               <mat-select matNativeControl required formControlName="status"
                                           [(ngModel)]="bookComponentModel.status">
                                 <mat-option value="journau">Journaux</mat-option>
@@ -102,7 +102,7 @@
                                 <mat-option value="magazine">Magazines</mat-option>
                               </mat-select>
                               <mat-error *ngIf="hasError('status', 'required')">
-                                <strong>Code transaction</strong> est nécessaire
+                                <strong>Status </strong> est nécessaire
                               </mat-error>
                             </mat-form-field>
                           </div>
@@ -116,7 +116,7 @@
                                      formControlName="edition" [(ngModel)]="bookComponentModel.edition"
                                      id="form-control-10" class="form-control">
                               <mat-error *ngIf="hasError('edition', 'required')">
-                                <strong>Code transaction</strong> est nécessaire
+                                <strong>Edition </strong> est nécessaire
                               </mat-error>
                             </mat-form-field>
                           </div>
@@ -132,7 +132,21 @@
                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>
                               <mat-error *ngIf="hasError('dateOfPurchase', 'required')">
-                                <strong>Code transaction</strong> est nécessaire
+                                <strong>Date d'achat </strong> est nécessaire
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                              <mat-label>Quantité</mat-label>
+                              <input matInput [readonly]="action!='add' && action!='update' " placeholder="Quantité"
+                                     type="number" required
+                                     formControlName="qnt" [(ngModel)]="bookComponentModel.qnt"
+                                     id="form-control-10" class="form-control">
+                              <mat-error *ngIf="hasError('qnt', 'required')">
+                                <strong>Quantité </strong> est nécessaire
                               </mat-error>
                             </mat-form-field>
                           </div>

@@ -66,6 +66,7 @@ export class BookComponent implements OnInit {
       status: new FormControl(this.bookComponentModel.status, [Validators.required]),
       edition: new FormControl(this.bookComponentModel.edition, [Validators.required]),
       dateOfPurchase: new FormControl(this.bookComponentModel.dateOfPurchase, [Validators.required]),
+      qnt: new FormControl(this.bookComponentModel.qnt,[Validators.required]),
     });
   }
   public hasError = (controlName: string, errorName: string) => {
