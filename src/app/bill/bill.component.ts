@@ -78,10 +78,11 @@ export class BillComponent implements OnInit {
   SelectionType = SelectionType;
   ColumnMode = ColumnMode;
   columns: any[] = [
-    {name: 'codeBill'},
-    {name: 'date'},
-    {name: 'memberCode'},
-    {name: 'amount'},
+    {name: 'CodeBill'},
+    {name: 'Date'},
+    {name: 'MemberCode'},
+    {name: 'Amount'},
+    {name: 'Quantity'}
   ];
   selected = [];
   @ViewChild('closebutton') closebutton;
@@ -192,7 +193,8 @@ export class BillComponent implements OnInit {
     this.table.offset = 0;
   }
 
-  onSelect() {
+  onSelect(event) {
+    this.billComponentModel = this.selected[0];
     this.enableAtteindre = true;
   }
 

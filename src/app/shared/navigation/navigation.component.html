@@ -14,7 +14,7 @@
           <img src="assets/images/user.png"/>
         </div>
         <span>{{fullName}}</span>
-        <small class="text-center">Libraire</small>
+        <small class="text-center">Admin</small>
       </a>
     </li>
     <!-- <li class=""><a href="javascript:void(0);" class="waves-effect"><i class="fa fa-envelope-o"></i> <span
@@ -43,7 +43,7 @@
       <li>
         <a [routerLink]="['/bill']" [routerLinkActive]="['active']">
           <i class="fa fa-file"></i>
-          <span class="hide-menu">Factures</span>
+          <span class="hide-menu">Facture</span>
         </a>
       </li>
 
@@ -57,7 +57,7 @@
     <li *ngIf="!showAdminBoard">
       <a [routerLink]="['/login']" [routerLinkActive]="['active']">
         <i class="fa fa-user-o"></i>
-        <span class="hide-menu">Se connecter</span>
+        <span class="hide-menu">Login</span>
       </a>
     </li>
   </ul>

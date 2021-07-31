@@ -45,7 +45,6 @@ export class TransactionComponent implements OnInit {
     {prop: 'memberCode', name:'Code de Membre'},
     {prop: 'bookCode', name: 'Code de livre'},
     {prop: 'dateOfIssue', name: "Date d'émission"},
-    //{name: 'dueDate'},
   ];
   transactionModule: TransactionModel = new TransactionModel();
   private currentItem: TransactionModel;
@@ -64,7 +63,7 @@ export class TransactionComponent implements OnInit {
       memberId: new FormControl(this.transactionModule.memberId, [Validators.required]),
       idBook: new FormControl(this.transactionModule.idBook, [Validators.required]),
       dateOfIssue: new FormControl(this.transactionModule.dateOfIssue, [Validators.required]),
-      //dueDate: new FormControl(this.transactionModule.dueDate, [Validators.required]),
+      quantity: new FormControl(this.transactionModule.quantity, [Validators.required]),
     });
   }
 

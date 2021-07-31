@@ -151,7 +151,7 @@
                 <div class="modal-footer">
                   <div class="float-start">
                     <button [disabled]="action==null || !myForm.valid" (click)="callAction()"
-                            class="btn btn-space btn-primary" >Valider
+                            #closebutton data-dismiss="modal" class="btn btn-space btn-primary" >Valider
                     </button>
                   </div>
                   <div class="float-start marging-left-15">
@@ -184,7 +184,7 @@
                       <span class="col-md-6 actions">
                         <button (click)="startAction('add')" data-toggle="modal" data-target="#exampleModal" mat-raised-button color="primary">Ajouter</button>
                         <button (click)="startAction('update')" data-toggle="modal" data-target="#exampleModal" mat-raised-button mat-button color="success">Modifier</button>
-                        <button (click)="startAction('delete')" data-toggle="modal" data-target="#exampleModal" mat-raised-button color="warn">Supprimer</button>
+                        <button (click)="startAction('delete')" mat-raised-button color="warn">Supprimer</button>
                       </span>
                     </span>
                     <span class="col-md-12">

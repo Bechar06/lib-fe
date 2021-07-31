@@ -1,0 +1,24 @@
+.bvs-button{
+    -webkit-text-size-adjust: 100%;
+    appearance: none;
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 100px;
+    outline: 0;
+    text-align: center;
+    text-decoration: none;
+    font-family: "Lato", Arial, Geneva, sans-serif;
+    font-weight: bold;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    background-color: #4648f7;
+    color: #fff;
+    border: 2px solid #009a44;
+    height: auto;
+    border-radius: 21px;
+    line-height: 48px;
+    padding: 0 30px;
+    margin: 0 0 16px;
+    font-size: 18px;
+    width: 100%;
+}
