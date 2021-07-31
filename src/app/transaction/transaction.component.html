@@ -3,7 +3,7 @@
     <div class="row row-stat">
       <div class="col-sm-12">
         <div class="panel panel-default">
-          <div class="panel-heading panel-heading-divider">Transaction<span
+          <div class="panel-heading panel-heading-divider">Transactions<span
             class="panel-subtitle">Maintenance des transactions</span>
           </div>
 
@@ -88,7 +88,7 @@
                             </mat-form-field>
                           </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                           <div class="col-sm-12">
                             <mat-form-field class="full-width">
                               <mat-label>Choisissez une date d'expiration</mat-label>
@@ -103,7 +103,7 @@
                               </mat-error>
                             </mat-form-field>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </form>
@@ -136,7 +136,7 @@
                         <input
                            type="text"
                            style="padding:8px;margin:15px auto;width:30%;"
-                           placeholder="Rechercher par code membre... "
+                           placeholder="Rechercher par code Transaction... "
                            (keyup)="updateFilter($event)"
                         />
                       </span>
@@ -148,6 +148,7 @@
                       </span>
                     </span>
                     <span class="col-md-12">
+
                       <ngx-datatable #table [rows]="transList" [columns]="columns" [columnMode]="ColumnMode.force"
 
                             [headerHeight]="40"
@@ -159,6 +160,7 @@
                             rowHeight="auto"
                             (select)="onSelect()" class="material">
                       </ngx-datatable>
+
                     </span>
                   </div>
                 </div>

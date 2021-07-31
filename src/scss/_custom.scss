@@ -11,16 +11,12 @@ body {
     color: #686868;
     font-weight: 300;
 }
-/*@import "assets/css/style.default.css";*/
 .sidebar {
   z-index: 10;
   position: absolute;
   width: 220px;
-  padding-top: 10px;
   height: 100%;
   background: #fff;
-  border-right: 1px solid #ccc;
-  box-shadow: 1px 5px 4px #ccc;
 }
 .fix-sidebar .sidebar {
     position: fixed;
@@ -63,7 +59,7 @@ body {
 ul#side-menu a {
     display: block;
     padding: 10px 15px;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #e3e3e3;
     color: #5c6270;
     background: #f2f2f2;
 }
@@ -96,19 +92,14 @@ ul#side-menu a.active i, ul#side-menu a:hover i  {
     border-radius: 100px;
     margin-top: -1px;
 }
-.logo{
-    padding: 0 20px;
-    max-width: 120px;
-    height: 100px;
-    width: 500px;
-}
+
 .btn {
     border-radius: 0;
     padding: 8px 20px;
 
 }
 ul#side-menu a.active {
-    background: orange;
+    background: #00adff;
     color: #fff;
 }
 ul#side-menu a:hover{
