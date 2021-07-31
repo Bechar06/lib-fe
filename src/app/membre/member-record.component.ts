@@ -42,14 +42,14 @@ export class MemberRecordComponent implements OnInit {
   SelectionType = SelectionType;
   ColumnMode = ColumnMode;
   columns: any[] = [
-    {name: 'codeMemberRecord'},
-    {name: 'fullName'},
-    {name: 'dateOfMemberRecordship'},
-    {name: 'maxBookLimit'},
-    {name: 'noBookIssued'},
-    {name: 'phoneNo'},
-    {name: 'type'},
-    {name: 'adress'}
+    {prop: 'codeMemberRecord', name:'Code de Membre'},
+    {prop: 'fullName', name:'Nom complet'},
+    {prop: 'dateOfMemberRecordship', name:"date d'adhésion"},
+    {prop: 'maxBookLimit', name:'max Book Limit'},
+    {prop: 'noBookIssued', name: 'nombre de livre acheté'},
+    {prop: 'phoneNo', name:'Numéro de telephone'},
+    {prop: 'type', name:'Type de Membre'},
+    {prop: 'adress', name:'Address de Membre'}
   ];
   selected = [];
   @ViewChild('closebutton') closebutton;

@@ -24,7 +24,6 @@ li.user-pro a:hover span, li.user-pro a:hover small {
 .panel {
     padding: 20px;
     color: #333;
-    margin: 25px 0;
 }
 
 .panel.panel-light {
@@ -103,7 +102,7 @@ tabset .nav-tabs .nav-link:focus,tabset .nav-tabs .nav-link:hover {
     border-color: #1f6b9e #1f6b9e #1f6b9e;
     background: #5d94b9;
 }
- 
+
 tabset .nav-tabs  .nav-link.active, tabset .nav-tabs .nav-link.active:focus tabset .nav-tabs .nav-item.show .nav-link{
     color: #ffffff;
     background-color: #fff;

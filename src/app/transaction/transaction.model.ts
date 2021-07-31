@@ -6,6 +6,6 @@ export class TransactionModel {
   idBook: number;
   bookCode: number;
   dateOfIssue: Date;
-  dueDate: Date;
+  //dueDate: Date;
 
 }

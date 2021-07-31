@@ -41,11 +41,11 @@ export class TransactionComponent implements OnInit {
   enableAtteindre = false;
   myForm: FormGroup;
   columns: any[] = [
-    {name: 'codeTrans'},
-    {name: 'memberCode'},
-    {name: 'bookCode'},
-    {name: 'dateOfIssue'},
-    {name: 'dueDate'},
+    {prop: 'codeTrans', name:'Code de transaction'},
+    {prop: 'memberCode', name:'Code de Membre'},
+    {prop: 'bookCode', name: 'Code de livre'},
+    {prop: 'dateOfIssue', name: "Date d'émission"},
+    //{name: 'dueDate'},
   ];
   transactionModule: TransactionModel = new TransactionModel();
   private currentItem: TransactionModel;
@@ -64,7 +64,7 @@ export class TransactionComponent implements OnInit {
       memberId: new FormControl(this.transactionModule.memberId, [Validators.required]),
       idBook: new FormControl(this.transactionModule.idBook, [Validators.required]),
       dateOfIssue: new FormControl(this.transactionModule.dateOfIssue, [Validators.required]),
-      dueDate: new FormControl(this.transactionModule.dueDate, [Validators.required]),
+      //dueDate: new FormControl(this.transactionModule.dueDate, [Validators.required]),
     });
   }
 

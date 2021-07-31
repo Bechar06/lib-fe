@@ -39,13 +39,13 @@ export class BookComponent implements OnInit {
   myForm: FormGroup;
   titleAction: string = 'Consultation';
   columns: any[] = [
-    {name: 'codeBook'},
-    {name: 'author'},
-    {name: 'title'},
-    {name: 'price'},
-    {name: 'rackNo'},
-    {name: 'status'},
-    {name: 'edition'}
+    {prop: 'codeBook', name:'Code de livre'},
+    {prop: 'author', name:'Auteur'},
+    {prop: 'title', name:'Titre'},
+    {prop: 'price', name:'Prix'},
+    {prop: 'rackNo', name:'Étagère'},
+    {prop: 'status', name:'Statut du livre'},
+    {prop: 'edition', name: 'Édition'}
   ];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   SelectionType = SelectionType;
