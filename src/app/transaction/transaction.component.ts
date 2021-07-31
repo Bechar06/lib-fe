@@ -63,7 +63,7 @@ export class TransactionComponent implements OnInit {
       memberId: new FormControl(this.transactionModule.memberId, [Validators.required]),
       idBook: new FormControl(this.transactionModule.idBook, [Validators.required]),
       dateOfIssue: new FormControl(this.transactionModule.dateOfIssue, [Validators.required]),
-      //dueDate: new FormControl(this.transactionModule.dueDate, [Validators.required]),
+      quantity: new FormControl(this.transactionModule.quantity, [Validators.required]),
     });
   }
 

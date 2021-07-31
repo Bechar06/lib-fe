@@ -5,4 +5,5 @@ export class BillComponentModel {
   memberId:number;
   memberCode:string;
   amount:number;
+  quantity: number;
 }

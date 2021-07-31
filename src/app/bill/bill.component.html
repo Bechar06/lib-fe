@@ -128,7 +128,7 @@
                          <!-- <button data-toggle="modal" data-target="#exampleModal" class="btn btn-space btn-warning">Rechercher</button> -->
                          <button (click)="startAction('update')" data-toggle="modal" data-target="#exampleModal" mat-raised-button mat-button color="success">Modifier</button>
                          <button (click)="export($event)" mat-raised-button color="accent">Imprimer</button>
-                         <button (click)="startAction('delete')" data-toggle="modal" data-target="#exampleModal" mat-raised-button color="warn">Supprimer</button>
+                         <button (click)="startAction('delete')"  mat-raised-button color="warn">Supprimer</button>
                       </span>
                     </span>
                     <span class="col-md-12">
@@ -140,7 +140,7 @@
                                  (activate)="onActivate($event)"
                                  [footerHeight]="50"
                                  rowHeight="auto"
-                                 (select)="onSelect()" class="material">
+                                 (select)="onSelect($event)" class="material">
                           </ngx-datatable>
                     </span>
                   </div>

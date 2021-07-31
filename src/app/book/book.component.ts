@@ -45,7 +45,8 @@ export class BookComponent implements OnInit {
     {prop: 'price', name:'Prix'},
     {prop: 'rackNo', name:'Étagère'},
     {prop: 'status', name:'Statut du livre'},
-    {prop: 'edition', name: 'Édition'}
+    {prop: 'edition', name: 'Édition'},
+    {prop: 'qnt', name: 'Qantité'}
   ];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   SelectionType = SelectionType;
@@ -55,7 +56,7 @@ export class BookComponent implements OnInit {
   @ViewChild('closebutton') closebutton;
 
   ngOnInit() {
- 
+
     this.myForm = new FormGroup({
       codeBook: new FormControl(this.bookComponentModel.codeBook, [Validators.required]),
       author: new FormControl(this.bookComponentModel.author, [Validators.required]),
