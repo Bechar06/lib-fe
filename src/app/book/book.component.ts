@@ -31,7 +31,7 @@ export class BookComponent implements OnInit {
     });
   }
 
-  bookList = [];
+  rows = [];
   bookTempList = [];
   bookComponentModel: BookComponentModel = new BookComponentModel();
   private currentItem: BookComponentModel;
@@ -55,8 +55,7 @@ export class BookComponent implements OnInit {
   @ViewChild('closebutton') closebutton;
 
   ngOnInit() {
-    this.getFirstBook();
-    this.getAllbook();
+ 
     this.myForm = new FormGroup({
       codeBook: new FormControl(this.bookComponentModel.codeBook, [Validators.required]),
       author: new FormControl(this.bookComponentModel.author, [Validators.required]),
@@ -68,6 +67,8 @@ export class BookComponent implements OnInit {
       dateOfPurchase: new FormControl(this.bookComponentModel.dateOfPurchase, [Validators.required]),
       qnt: new FormControl(this.bookComponentModel.qnt,[Validators.required]),
     });
+    this.getFirstBook();
+    this.getAllbook();
   }
   public hasError = (controlName: string, errorName: string) => {
     return this.myForm.controls[controlName].hasError(errorName);
@@ -84,7 +85,7 @@ export class BookComponent implements OnInit {
   getAllbook() {
     this.bookservice.getAllbook().subscribe(resp => {
       this.bookTempList = [...resp];
-      this.bookList = resp;
+      this.rows = resp;
     });
   }
 
@@ -192,7 +193,7 @@ export class BookComponent implements OnInit {
     });
 
     // update the rows
-    this.bookList = temp;
+    this.rows = temp;
     // Whenever the filter changes, always go back to the first page
     this.table.offset = 0;
   }

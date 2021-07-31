@@ -45,7 +45,6 @@ export class TransactionComponent implements OnInit {
     {prop: 'memberCode', name:'Code de Membre'},
     {prop: 'bookCode', name: 'Code de livre'},
     {prop: 'dateOfIssue', name: "Date d'émission"},
-    //{name: 'dueDate'},
   ];
   transactionModule: TransactionModel = new TransactionModel();
   private currentItem: TransactionModel;

@@ -78,10 +78,10 @@ export class BillComponent implements OnInit {
   SelectionType = SelectionType;
   ColumnMode = ColumnMode;
   columns: any[] = [
-    {name: 'codeBill'},
-    {name: 'date'},
-    {name: 'memberCode'},
-    {name: 'amount'},
+    {name: 'CodeBill'},
+    {name: 'Date'},
+    {name: 'MemberCode'},
+    {name: 'Amount'},
   ];
   selected = [];
   @ViewChild('closebutton') closebutton;
